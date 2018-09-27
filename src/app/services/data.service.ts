@@ -33,7 +33,7 @@ export class DataService {
     }
 
     // VIDEO DO FILME
-    getVideo(id: number): Observable<any[]> {
+    getVideo(id: number): Observable<any> {
         let url: string;
         const headers = new Headers({ 'Content-Type': 'application/json'});
         const options = new RequestOptions({ headers: headers });
