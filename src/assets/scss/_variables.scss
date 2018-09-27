@@ -1,0 +1,23 @@
+/* FONTS */
+@include font-face("Lato", "/assets/fonts/lato-light", 300);
+@include font-face("Lato", "/assets/fonts/lato-regular", normal);
+@include font-face("Lato", "/assets/fonts/lato-bold", 600);
+@include font-face("Lato", "/assets/fonts/lato-black", bold);
+@include font-face("Abel", "/assets/fonts/abel-regular", normal);
+
+$font-lato: "Lato", "Arial";
+$font-abel: "Abel", "Arial";
+
+
+/* EASING */
+$cubic: cubic-bezier(0.4,0.1,0.25,1);
+$cubic2: cubic-bezier(0.7,0,0.3,1);
+$cubic-elastic: cubic-bezier(0.65, -0.6, 0.24, 1.65);
+$cubic-in-out: cubic-bezier(.6,.99,.6,.99);
+
+
+/* COLORS */
+$color-primary:         #116193;
+$color-accent:          #ebebeb;
+$color-title:           #00e8e4;
+$color-text:            #595959;

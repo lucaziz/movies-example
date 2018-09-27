@@ -1,0 +1,42 @@
+<section class="cubos-main-list">
+    <header class="cubos-movie-search">
+        <input type="text" [(ngModel)]="queryListString" (input)="queryList.next($event.target.value)" placeholder="Busque um filme por nome, ano ou gênero..." />
+    </header>
+
+    <div class="cubos-movie-list" *ngIf="moviesList?.length > 0">
+        <div class="cubos-movie-list-item" *ngFor="let movie of moviesList | paginate: { itemsPerPage: 5, currentPage: currentPage }" [routerLink]="['/detail', movie.id]">
+            <div class="cubos-movie-list-thumb">
+                <img *ngIf="movie.poster_path" class="fill" src="http://image.tmdb.org/t/p/w185/{{movie.poster_path}}" alt="{{movie.title}}" />
+                <img *ngIf="!movie.poster_path" src="assets/svgs/placeholder.svg" alt="Sem poster" />
+            </div>
+            <div class="cubos-movie-list-desc">
+                <div class="cubos-movie-list-header">
+                    <h2 class="cubos-movie-list-title">{{movie.title}}</h2>
+                    <div class="cubos-movie-rating">{{movie.vote_average*10}}%</div>
+                </div>
+                <div class="cubos-movie-list-content">
+                    <div class="cubos-movie-list-date">{{movie.release_date | date:'dd/MM/yyy' }}</div>
+                    <div class="cubos-movie-list-sinopse">
+                        {{(movie.overview ? movie.overview : 'Sem sinopse disponível para esse título.')}}
+                    </div>
+                    <ul class="cubos-movie-list-tags">
+                        <li *ngFor="let genre of movie.genre_ids">{{genre}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination" *ngIf="moviesList?.length > 5">
+        <pagination-controls autoHide="true" directionLinks="false" (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+
+    <div class="loading-content" *ngIf="loading">
+        <div class="loading"><div *ngFor="let detalhe of [0,1,2,3,4,5,6,7,8,9,10,11]"></div></div>
+    </div>
+
+    <div class="empty-list" *ngIf="moviesList?.length <= 0 && !loading">
+        <img src="assets/svgs/empty_list.svg" alt="Sem resultado" />
+        <span *ngIf="queryListString?.trim().length <= 3; else noResults">Faça uma busca!</span>
+        <ng-template #noResults>Nenhum resultado encontrado.</ng-template>
+    </div>
+</section>
